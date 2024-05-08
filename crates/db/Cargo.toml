@@ -1,0 +1,12 @@
+[package]
+name = "db"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+diesel = { version = "2.1.6", features = ["postgres", "r2d2"] }
+serde = { version = "1", features = ["derive"] }
+deadpool-diesel = {version = "0.6.1", features = ["postgres"]}
+deadpool = "0.12.1"
