@@ -46,9 +46,7 @@ async fn list_todo(State(pool): State<Pool>) -> Result<Json<Vec<Todo>>> {
 }
 
 async fn create_todo(
-    State(pool): State<Pool>,
-    Json(new_todo): Json<NewTodo>,
-) -> Result<Json<Todo>> {
+    State(pool): State<Pool>, Json(new_todo): Json<NewTodo>) -> Result<Json<Todo>> {
     let conn = pool.get().await?;
     let new_todo = conn
         .interact(move |conn| {
@@ -82,7 +80,7 @@ async fn update_todo(State(pool): State<Pool>, Json(todo): Json<Todo>) -> Result
             diesel::update(todos::table.filter(todos::id.eq(todo.id)))
                 .set((
                     todos::description.eq(todo.description),
-                    (todos::completed.eq(todo.completed)),
+                    todos::completed.eq(todo.completed),
                 ))
                 .get_result(conn)
         })
